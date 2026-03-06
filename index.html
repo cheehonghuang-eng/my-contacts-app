@@ -92,45 +92,6 @@
 
     header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.95rem; }
 
-    #setup-banner {
-      background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(123,97,255,0.15));
-      border: 1px solid rgba(79,142,247,0.35);
-      border-radius: var(--radius);
-      padding: 1.2rem 1.5rem;
-      margin-bottom: 2rem;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      animation: fadeIn 0.5s 0.3s both;
-    }
-
-    #setup-banner strong { color: var(--accent); }
-    #setup-banner code {
-      background: rgba(255,255,255,0.08);
-      padding: 0.15em 0.5em;
-      border-radius: 5px;
-      font-size: 0.85em;
-      color: var(--yellow);
-      display: block;
-      margin-top: 0.5rem;
-      white-space: pre-wrap;
-      line-height: 1.6;
-    }
-
-    .config-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem 1.6rem;
-      margin-bottom: 2rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      animation: fadeIn 0.5s 0.2s both;
-    }
-
-    .config-panel .field { flex: 1; min-width: 200px; }
-
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -281,9 +242,7 @@
     }
 
     .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
-
     table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-
     thead { background: var(--surface2); }
     thead th {
       padding: 0.85rem 1rem;
@@ -334,8 +293,8 @@
 
     .btn-edit { background:rgba(79,142,247,0.12); color:var(--accent); border-color:rgba(79,142,247,0.25); }
     .btn-edit:hover { background:rgba(79,142,247,0.22); }
-    .btn-del  { background:rgba(248,113,113,0.1);  color:var(--red);   border-color:rgba(248,113,113,0.25); }
-    .btn-del:hover  { background:rgba(248,113,113,0.2); }
+    .btn-del  { background:rgba(248,113,113,0.1);  color:var(--red); border-color:rgba(248,113,113,0.25); }
+    .btn-del:hover { background:rgba(248,113,113,0.2); }
 
     .empty-state { text-align:center; padding:3rem 1rem; color:var(--muted); }
     .empty-state .icon { font-size:2.5rem; margin-bottom:0.5rem; }
@@ -349,7 +308,6 @@
       font-size: 0.85rem;
       color: var(--muted);
       display: flex; align-items: center; gap: 0.4rem;
-      animation: fadeIn 0.5s 0.4s both;
     }
     .stat-chip strong { color: var(--text); font-size: 1.1rem; }
 
@@ -394,44 +352,19 @@
 
   <header>
     <h1>📇 Contacts Manager</h1>
-    <p>Insert, update, delete and retrieve — connected to Supabase</p>
+    <p>Add, edit and delete your contacts — all saved to the cloud</p>
   </header>
 
-  <div id="setup-banner">
-    <strong>⚙️ One-time setup — run this SQL in Supabase first (SQL Editor → New Query → Run):</strong>
-    <code>create table contacts (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  email text,
-  phone text,
-  company text,
-  created_at timestamptz default now()
-);
-alter table contacts enable row level security;
-create policy "Public access" on contacts for all using (true) with check (true);</code>
-    <br>Then paste your <strong>Project URL</strong> and <strong>anon key</strong> from Supabase → Project Settings → API below.
-  </div>
-
-  <!-- Config -->
-  <div class="config-panel">
-    <div class="field">
-      <label for="cfg-url">Supabase Project URL</label>
-      <input type="text" id="cfg-url" placeholder="https://xxxx.supabase.co" />
-    </div>
-    <div class="field">
-      <label for="cfg-key">Supabase Anon Key</label>
-      <input type="text" id="cfg-key" placeholder="eyJhbGci..." />
-    </div>
-    <button class="btn-primary" id="btn-connect">Connect →</button>
-  </div>
-
-  <!-- Form -->
+  <!-- Add / Edit Form -->
   <div class="card">
-    <div class="card-title"><span class="dot"></span> <span id="form-title">Add New Contact</span></div>
+    <div class="card-title">
+      <span class="dot"></span>
+      <span id="form-title">Add New Contact</span>
+    </div>
 
     <div class="editing-bar" id="editing-bar">
       ✏️ Editing: <strong id="editing-name"></strong>
-      <button class="btn-ghost" id="btn-cancel-edit" style="margin-left:auto; padding:0.3rem 0.8rem; font-size:0.8rem;">Cancel</button>
+      <button class="btn-ghost" id="btn-cancel-edit" style="margin-left:auto;padding:0.3rem 0.8rem;font-size:0.8rem;">Cancel</button>
     </div>
 
     <div class="form-grid">
@@ -459,7 +392,7 @@ create policy "Public access" on contacts for all using (true) with check (true)
     </div>
   </div>
 
-  <!-- Records -->
+  <!-- Contacts Table -->
   <div class="card">
     <div class="card-title">
       <span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>
@@ -491,8 +424,8 @@ create policy "Public access" on contacts for all using (true) with check (true)
         <tbody id="contacts-tbody">
           <tr><td colspan="5">
             <div class="empty-state">
-              <div class="icon">🔌</div>
-              Connect to Supabase above to load contacts
+              <div class="icon">⏳</div>
+              Connecting to database…
             </div>
           </td></tr>
         </tbody>
@@ -500,70 +433,44 @@ create policy "Public access" on contacts for all using (true) with check (true)
     </div>
   </div>
 
-</div><!-- /wrapper -->
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
 <script>
+  // ── Credentials are hardcoded — no login panel needed ─────────────────────
+  const SUPABASE_URL = 'https://utonakdztilagefebtal.supabase.co'
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0b25ha2R6dGlsYWdlZmVidGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3NjM5MDYsImV4cCI6MjA4ODMzOTkwNn0.NSUOY6aE4SmOk3RawwOCfnI4PIO2lZRaJTbh787cG-4'
+
   // ── State ──────────────────────────────────────────────────────────────────
-  let sb          = null   // supabase client
+  let sb          = null
   let allContacts = []
   let editingId   = null
 
-  // ── Wire up all buttons via addEventListener (no inline onclick) ───────────
-  document.getElementById('btn-connect').addEventListener('click', saveConfig)
+  // ── Button listeners ───────────────────────────────────────────────────────
   document.getElementById('btn-save').addEventListener('click', saveContact)
   document.getElementById('btn-clear').addEventListener('click', cancelEdit)
   document.getElementById('btn-cancel-edit').addEventListener('click', cancelEdit)
   document.getElementById('btn-refresh').addEventListener('click', loadContacts)
   document.getElementById('search-inp').addEventListener('input', filterTable)
 
-  // ── Auto-load saved credentials ────────────────────────────────────────────
+  // ── Connect and load on page open ─────────────────────────────────────────
   window.addEventListener('DOMContentLoaded', () => {
-    const url = localStorage.getItem('sb_url')
-    const key = localStorage.getItem('sb_key')
-    if (url && key) {
-      document.getElementById('cfg-url').value = url
-      document.getElementById('cfg-key').value = key
-      initSupabase(url, key)
-    }
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    loadContacts()
   })
 
-  // ── Connect ────────────────────────────────────────────────────────────────
-  function saveConfig() {
-    const url = document.getElementById('cfg-url').value.trim()
-    const key = document.getElementById('cfg-key').value.trim()
-    if (!url || !key)                  { showToast('Please enter both URL and Anon Key', 'error'); return }
-    if (!url.startsWith('https://'))   { showToast('URL must start with https://', 'error'); return }
-    initSupabase(url, key)
-  }
-
-  function initSupabase(url, key) {
-    try {
-      sb = window.supabase.createClient(url, key)
-      localStorage.setItem('sb_url', url)
-      localStorage.setItem('sb_key', key)
-      document.getElementById('setup-banner').style.display = 'none'
-      showToast('Connected! Loading contacts…', 'success')
-      loadContacts()
-    } catch (e) {
-      showToast('Connection failed: ' + e.message, 'error')
-    }
-  }
-
-  // ── Load ───────────────────────────────────────────────────────────────────
+  // ── Load all contacts ──────────────────────────────────────────────────────
   async function loadContacts() {
-    if (!sb) { showToast('Connect to Supabase first', 'error'); return }
     setTableLoading(true)
-
     const { data, error } = await sb
       .from('contacts')
       .select('*')
       .order('created_at', { ascending: false })
 
     if (error) {
-      setTableLoading(false)
       showToast('Load failed: ' + error.message, 'error')
+      setTableLoading(false)
       return
     }
 
@@ -573,10 +480,8 @@ create policy "Public access" on contacts for all using (true) with check (true)
     document.getElementById('stat-loaded').textContent = new Date().toLocaleTimeString()
   }
 
-  // ── Save (Insert or Update) ────────────────────────────────────────────────
+  // ── Insert or Update ───────────────────────────────────────────────────────
   async function saveContact() {
-    if (!sb) { showToast('Connect to Supabase first', 'error'); return }
-
     const name    = document.getElementById('inp-name').value.trim()
     const email   = document.getElementById('inp-email').value.trim()
     const phone   = document.getElementById('inp-phone').value.trim()
@@ -584,25 +489,18 @@ create policy "Public access" on contacts for all using (true) with check (true)
 
     if (!name) { showToast('Name is required', 'error'); return }
 
-    const payload = {
-      name,
-      email:   email   || null,
-      phone:   phone   || null,
-      company: company || null,
-    }
+    const payload = { name, email: email||null, phone: phone||null, company: company||null }
 
     const btn = document.getElementById('btn-save')
-    btn.disabled = true
+    btn.disabled  = true
     btn.innerHTML = '<span class="spinner"></span> Saving…'
 
     if (editingId) {
       const { error } = await sb.from('contacts').update(payload).eq('id', editingId)
-      btn.disabled = false
       if (error) { showToast('Update failed: ' + error.message, 'error'); resetSaveBtn(); return }
       showToast('Contact updated ✓', 'success')
     } else {
       const { error } = await sb.from('contacts').insert([payload])
-      btn.disabled = false
       if (error) { showToast('Insert failed: ' + error.message, 'error'); resetSaveBtn(); return }
       showToast('Contact added ✓', 'success')
     }
@@ -620,23 +518,22 @@ create policy "Public access" on contacts for all using (true) with check (true)
     loadContacts()
   }
 
-  // ── Edit ───────────────────────────────────────────────────────────────────
+  // ── Start editing a row ────────────────────────────────────────────────────
   function startEdit(id, name, email, phone, company) {
     editingId = id
     document.getElementById('inp-name').value    = name    || ''
     document.getElementById('inp-email').value   = email   || ''
     document.getElementById('inp-phone').value   = phone   || ''
     document.getElementById('inp-company').value = company || ''
-
     document.getElementById('form-title').textContent    = 'Edit Contact'
     document.getElementById('editing-name').textContent  = name
     document.getElementById('editing-bar').style.display = 'flex'
     document.getElementById('btn-save').innerHTML        = '✓ Save Changes'
-
     document.querySelector('.card').scrollIntoView({ behavior: 'smooth' })
     document.getElementById('inp-name').focus()
   }
 
+  // ── Cancel / clear form ────────────────────────────────────────────────────
   function cancelEdit() {
     editingId = null
     document.getElementById('inp-name').value    = ''
@@ -649,12 +546,12 @@ create policy "Public access" on contacts for all using (true) with check (true)
   }
 
   function resetSaveBtn() {
-    const btn = document.getElementById('btn-save')
+    const btn     = document.getElementById('btn-save')
     btn.disabled  = false
     btn.innerHTML = editingId ? '✓ Save Changes' : '＋ Add Contact'
   }
 
-  // ── Render Table ───────────────────────────────────────────────────────────
+  // ── Render table rows ──────────────────────────────────────────────────────
   function renderTable(contacts) {
     const tbody = document.getElementById('contacts-tbody')
 
@@ -668,10 +565,10 @@ create policy "Public access" on contacts for all using (true) with check (true)
     }
 
     tbody.innerHTML = contacts.map((c, i) => {
-      const ini  = (c.name || '?').split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2)
-      const safe = (s) => (s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+      const ini  = (c.name||'?').split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)
+      const safe = s => (s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
       return `
-        <tr style="animation-delay:${i * 0.04}s">
+        <tr style="animation-delay:${i*0.04}s">
           <td><div class="name-cell">
             <div class="avatar">${ini}</div>
             <span>${esc(c.name)}</span>
@@ -679,49 +576,43 @@ create policy "Public access" on contacts for all using (true) with check (true)
           <td>${c.email   ? esc(c.email)   : '<span style="color:var(--muted)">—</span>'}</td>
           <td>${c.phone   ? esc(c.phone)   : '<span style="color:var(--muted)">—</span>'}</td>
           <td>${c.company ? esc(c.company) : '<span style="color:var(--muted)">—</span>'}</td>
-          <td>
-            <div style="display:flex;gap:0.4rem">
-              <button class="action-btn btn-edit" data-id="${c.id}" data-name="${safe(c.name)}" data-email="${safe(c.email)}" data-phone="${safe(c.phone)}" data-company="${safe(c.company)}">✏️ Edit</button>
-              <button class="action-btn btn-del"  data-id="${c.id}" data-name="${safe(c.name)}">🗑 Delete</button>
-            </div>
-          </td>
+          <td><div style="display:flex;gap:0.4rem">
+            <button class="action-btn btn-edit"
+              data-id="${c.id}" data-name="${safe(c.name)}"
+              data-email="${safe(c.email)}" data-phone="${safe(c.phone)}"
+              data-company="${safe(c.company)}">✏️ Edit</button>
+            <button class="action-btn btn-del"
+              data-id="${c.id}" data-name="${safe(c.name)}">🗑 Delete</button>
+          </div></td>
         </tr>`
     }).join('')
 
-    // Attach edit/delete listeners to each row button
     tbody.querySelectorAll('.btn-edit').forEach(btn => {
-      btn.addEventListener('click', () => {
-        startEdit(btn.dataset.id, btn.dataset.name, btn.dataset.email, btn.dataset.phone, btn.dataset.company)
-      })
+      btn.addEventListener('click', () =>
+        startEdit(btn.dataset.id, btn.dataset.name, btn.dataset.email, btn.dataset.phone, btn.dataset.company))
     })
-
     tbody.querySelectorAll('.btn-del').forEach(btn => {
-      btn.addEventListener('click', () => {
-        deleteContact(btn.dataset.id, btn.dataset.name)
-      })
+      btn.addEventListener('click', () => deleteContact(btn.dataset.id, btn.dataset.name))
     })
   }
 
-  // ── Search ─────────────────────────────────────────────────────────────────
+  // ── Live search filter ─────────────────────────────────────────────────────
   function filterTable() {
     const q = document.getElementById('search-inp').value.toLowerCase()
-    const filtered = allContacts.filter(c =>
-      (c.name    || '').toLowerCase().includes(q) ||
-      (c.email   || '').toLowerCase().includes(q) ||
-      (c.company || '').toLowerCase().includes(q)
-    )
-    renderTable(filtered)
+    renderTable(allContacts.filter(c =>
+      (c.name||'').toLowerCase().includes(q) ||
+      (c.email||'').toLowerCase().includes(q) ||
+      (c.company||'').toLowerCase().includes(q)
+    ))
   }
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
+  // ── Utility helpers ────────────────────────────────────────────────────────
   function setTableLoading(on) {
-    if (on) {
-      document.getElementById('contacts-tbody').innerHTML =
-        `<tr><td colspan="5" style="text-align:center;padding:2.5rem;color:var(--muted)">
-          <span class="spinner" style="border-top-color:var(--accent)"></span>
-          &nbsp; Loading…
-        </td></tr>`
-    }
+    if (!on) return
+    document.getElementById('contacts-tbody').innerHTML =
+      `<tr><td colspan="5" style="text-align:center;padding:2.5rem;color:var(--muted)">
+        <span class="spinner" style="border-top-color:var(--accent)"></span>&nbsp; Loading…
+      </td></tr>`
   }
 
   function esc(str) {
@@ -733,8 +624,7 @@ create policy "Public access" on contacts for all using (true) with check (true)
   let toastTimer = null
   function showToast(msg, type) {
     const t = document.getElementById('toast')
-    const icons = { success: '✅', error: '❌', info: 'ℹ️' }
-    t.textContent = (icons[type] || '') + ' ' + msg
+    t.textContent = ({ success:'✅ ', error:'❌ ', info:'ℹ️ ' }[type]||'') + msg
     t.className   = 'toast-' + type
     clearTimeout(toastTimer)
     toastTimer = setTimeout(() => { t.style.display = 'none' }, 3500)
