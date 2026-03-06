@@ -29,13 +29,11 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
       min-height: 100vh;
       padding: 2rem 1rem;
       overflow-x: hidden;
     }
 
-    /* Animated background grid */
     body::before {
       content: '';
       position: fixed;
@@ -52,10 +50,8 @@
     body::after {
       content: '';
       position: fixed;
-      top: -40%;
-      left: -20%;
-      width: 70%;
-      height: 70%;
+      top: -40%; left: -20%;
+      width: 70%; height: 70%;
       background: radial-gradient(ellipse, rgba(79,142,247,0.12) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
@@ -63,8 +59,8 @@
     }
 
     @keyframes drift {
-      from { transform: translate(0, 0); }
-      to   { transform: translate(8%, 6%); }
+      from { transform: translate(0,0); }
+      to   { transform: translate(8%,6%); }
     }
 
     .wrapper {
@@ -74,7 +70,6 @@
       margin: 0 auto;
     }
 
-    /* ── HEADER ── */
     header {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -82,8 +77,8 @@
     }
 
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-24px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(-24px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
     header h1 {
@@ -93,16 +88,10 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -0.5px;
     }
 
-    header p {
-      color: var(--muted);
-      margin-top: 0.4rem;
-      font-size: 0.95rem;
-    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.95rem; }
 
-    /* ── SETUP BANNER ── */
     #setup-banner {
       background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(123,97,255,0.15));
       border: 1px solid rgba(79,142,247,0.35);
@@ -110,20 +99,23 @@
       padding: 1.2rem 1.5rem;
       margin-bottom: 2rem;
       font-size: 0.88rem;
-      line-height: 1.7;
+      line-height: 1.8;
       animation: fadeIn 0.5s 0.3s both;
     }
 
     #setup-banner strong { color: var(--accent); }
     #setup-banner code {
       background: rgba(255,255,255,0.08);
-      padding: 0.15em 0.4em;
+      padding: 0.15em 0.5em;
       border-radius: 5px;
       font-size: 0.85em;
       color: var(--yellow);
+      display: block;
+      margin-top: 0.5rem;
+      white-space: pre-wrap;
+      line-height: 1.6;
     }
 
-    /* ── CONFIG PANEL ── */
     .config-panel {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -138,9 +130,7 @@
     }
 
     .config-panel .field { flex: 1; min-width: 200px; }
-    .config-panel label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.4rem; }
 
-    /* ── FORM CARD ── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -161,26 +151,22 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--text);
     }
 
-    .card-title .dot {
+    .dot {
       width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* ── FORM GRID ── */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
 
-    .form-grid .full { grid-column: 1 / -1; }
-
-    .field label {
+    label {
       display: block;
       font-size: 0.78rem;
       color: var(--muted);
@@ -189,7 +175,8 @@
       margin-bottom: 0.45rem;
     }
 
-    .field input, .field select {
+    input[type="text"],
+    input[type="email"] {
       width: 100%;
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -202,14 +189,14 @@
       outline: none;
     }
 
-    .field input:focus {
+    input[type="text"]:focus,
+    input[type="email"]:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(79,142,247,0.15);
     }
 
-    .field input::placeholder { color: var(--muted); }
+    input::placeholder { color: var(--muted); }
 
-    /* ── BUTTONS ── */
     .btn-row {
       display: flex;
       gap: 0.75rem;
@@ -229,7 +216,6 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      letter-spacing: 0.02em;
     }
 
     .btn-primary {
@@ -238,28 +224,20 @@
       box-shadow: 0 4px 16px rgba(79,142,247,0.3);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(79,142,247,0.45);
-    }
-
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79,142,247,0.45); }
     .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
     .btn-ghost {
       background: var(--surface2);
       color: var(--muted);
       border: 1px solid var(--border);
     }
-
     .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
 
-    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-
-    /* ── TOAST ── */
     #toast {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 2rem; right: 2rem;
       padding: 0.85rem 1.4rem;
       border-radius: 10px;
       font-size: 0.9rem;
@@ -269,24 +247,18 @@
       align-items: center;
       gap: 0.5rem;
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      animation: toastIn 0.35s cubic-bezier(0.22,1,0.36,1);
     }
 
     @keyframes toastIn {
-      from { opacity: 0; transform: translateY(16px) scale(0.95); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity:0; transform:translateY(16px) scale(0.95); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
     }
 
-    .toast-success { background: rgba(52,211,153,0.15); border: 1px solid var(--green); color: var(--green); display: flex !important; }
-    .toast-error   { background: rgba(248,113,113,0.15); border: 1px solid var(--red);   color: var(--red);   display: flex !important; }
-    .toast-info    { background: rgba(79,142,247,0.15);  border: 1px solid var(--accent); color: var(--accent); display: flex !important; }
+    .toast-success { background:rgba(52,211,153,0.15); border:1px solid var(--green); color:var(--green); display:flex !important; animation:toastIn 0.35s ease; }
+    .toast-error   { background:rgba(248,113,113,0.15); border:1px solid var(--red);   color:var(--red);   display:flex !important; animation:toastIn 0.35s ease; }
+    .toast-info    { background:rgba(79,142,247,0.15);  border:1px solid var(--accent); color:var(--accent); display:flex !important; animation:toastIn 0.35s ease; }
 
-    /* ── SEARCH BAR ── */
-    .search-wrap {
-      position: relative;
-      margin-bottom: 1rem;
-    }
-
+    .search-wrap { position: relative; margin-bottom: 1rem; }
     .search-wrap input {
       width: 100%;
       background: var(--surface2);
@@ -299,35 +271,20 @@
       outline: none;
       transition: border-color 0.2s;
     }
-
     .search-wrap input:focus { border-color: var(--accent); }
     .search-icon {
       position: absolute;
-      left: 0.8rem;
-      top: 50%;
+      left: 0.8rem; top: 50%;
       transform: translateY(-50%);
       color: var(--muted);
-      font-size: 1rem;
       pointer-events: none;
     }
 
-    /* ── TABLE ── */
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 
-    thead {
-      background: var(--surface2);
-    }
-
+    thead { background: var(--surface2); }
     thead th {
       padding: 0.85rem 1rem;
       text-align: left;
@@ -346,28 +303,20 @@
     }
 
     @keyframes rowIn {
-      from { opacity: 0; transform: translateX(-10px); }
-      to   { opacity: 1; transform: translateX(0); }
+      from { opacity:0; transform:translateX(-10px); }
+      to   { opacity:1; transform:translateX(0); }
     }
 
     tbody tr:hover { background: rgba(79,142,247,0.05); }
     tbody tr:last-child { border-bottom: none; }
-
-    tbody td {
-      padding: 0.85rem 1rem;
-      color: var(--text);
-      vertical-align: middle;
-    }
+    tbody td { padding: 0.85rem 1rem; vertical-align: middle; }
 
     .avatar {
       width: 34px; height: 34px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex; align-items: center; justify-content: center;
-      font-weight: 700;
-      font-size: 0.8rem;
-      color: white;
-      flex-shrink: 0;
+      font-weight: 700; font-size: 0.8rem; color: white; flex-shrink: 0;
     }
 
     .name-cell { display: flex; align-items: center; gap: 0.65rem; }
@@ -383,36 +332,15 @@
       font-family: 'DM Sans', sans-serif;
     }
 
-    .btn-edit {
-      background: rgba(79,142,247,0.12);
-      color: var(--accent);
-      border-color: rgba(79,142,247,0.25);
-    }
-    .btn-edit:hover { background: rgba(79,142,247,0.22); }
+    .btn-edit { background:rgba(79,142,247,0.12); color:var(--accent); border-color:rgba(79,142,247,0.25); }
+    .btn-edit:hover { background:rgba(79,142,247,0.22); }
+    .btn-del  { background:rgba(248,113,113,0.1);  color:var(--red);   border-color:rgba(248,113,113,0.25); }
+    .btn-del:hover  { background:rgba(248,113,113,0.2); }
 
-    .btn-del {
-      background: rgba(248,113,113,0.1);
-      color: var(--red);
-      border-color: rgba(248,113,113,0.25);
-    }
-    .btn-del:hover { background: rgba(248,113,113,0.2); }
+    .empty-state { text-align:center; padding:3rem 1rem; color:var(--muted); }
+    .empty-state .icon { font-size:2.5rem; margin-bottom:0.5rem; }
 
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--muted);
-    }
-
-    .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-
-    /* ── STATS ROW ── */
-    .stats-row {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
+    .stats-row { display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; }
     .stat-chip {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -420,32 +348,12 @@
       padding: 0.65rem 1.1rem;
       font-size: 0.85rem;
       color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      display: flex; align-items: center; gap: 0.4rem;
       animation: fadeIn 0.5s 0.4s both;
     }
-
     .stat-chip strong { color: var(--text); font-size: 1.1rem; }
 
-    /* ── MISC ── */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .spinner {
-      width: 16px; height: 16px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      display: inline-block;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .editing-indicator {
+    .editing-bar {
       background: rgba(251,191,36,0.1);
       border: 1px solid rgba(251,191,36,0.3);
       border-radius: 8px;
@@ -458,9 +366,23 @@
       gap: 0.5rem;
     }
 
+    .spinner {
+      width:16px; height:16px;
+      border:2px solid rgba(255,255,255,0.3);
+      border-top-color:white;
+      border-radius:50%;
+      animation:spin 0.7s linear infinite;
+      display:inline-block;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(8px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
     @media (max-width: 600px) {
       .form-grid { grid-template-columns: 1fr; }
-      .form-grid .full { grid-column: 1; }
     }
   </style>
 </head>
@@ -470,95 +392,89 @@
 
 <div class="wrapper">
 
-  <!-- Header -->
   <header>
     <h1>📇 Contacts Manager</h1>
     <p>Insert, update, delete and retrieve — connected to Supabase</p>
   </header>
 
-  <!-- Setup Instructions -->
   <div id="setup-banner">
-    <strong>⚙️ Setup required before this works:</strong><br>
-    1. Create a free account at <strong>supabase.com</strong> → New project<br>
-    2. Go to <strong>SQL Editor</strong> and run the SQL below to create the table<br>
-    3. Go to <strong>Project Settings → API</strong> and copy your <code>URL</code> and <code>anon key</code><br>
-    4. Paste them into the config fields below<br><br>
-    <strong>SQL to run in Supabase:</strong><br>
-    <code>
-      create table contacts (
-        id uuid primary key default gen_random_uuid(),
-        name text not null,
-        email text,
-        phone text,
-        company text,
-        created_at timestamptz default now()
-      );
-      alter table contacts enable row level security;
-      create policy "Public access" on contacts for all using (true) with check (true);
-    </code>
+    <strong>⚙️ One-time setup — run this SQL in Supabase first (SQL Editor → New Query → Run):</strong>
+    <code>create table contacts (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text,
+  phone text,
+  company text,
+  created_at timestamptz default now()
+);
+alter table contacts enable row level security;
+create policy "Public access" on contacts for all using (true) with check (true);</code>
+    <br>Then paste your <strong>Project URL</strong> and <strong>anon key</strong> from Supabase → Project Settings → API below.
   </div>
 
-  <!-- Config Panel -->
+  <!-- Config -->
   <div class="config-panel">
     <div class="field">
-      <label>Supabase URL</label>
+      <label for="cfg-url">Supabase Project URL</label>
       <input type="text" id="cfg-url" placeholder="https://xxxx.supabase.co" />
     </div>
     <div class="field">
-      <label>Supabase Anon Key</label>
+      <label for="cfg-key">Supabase Anon Key</label>
       <input type="text" id="cfg-key" placeholder="eyJhbGci..." />
     </div>
-    <button class="btn-primary" onclick="saveConfig()">Connect →</button>
+    <button class="btn-primary" id="btn-connect">Connect →</button>
   </div>
 
-  <!-- Form Card -->
+  <!-- Form -->
   <div class="card">
     <div class="card-title"><span class="dot"></span> <span id="form-title">Add New Contact</span></div>
 
-    <div id="editing-indicator" class="editing-indicator">
-      ✏️ Editing contact — <strong id="editing-name"></strong>
-      <button class="btn-ghost" style="margin-left:auto; padding:0.3rem 0.7rem; font-size:0.8rem;" onclick="cancelEdit()">Cancel</button>
+    <div class="editing-bar" id="editing-bar">
+      ✏️ Editing: <strong id="editing-name"></strong>
+      <button class="btn-ghost" id="btn-cancel-edit" style="margin-left:auto; padding:0.3rem 0.8rem; font-size:0.8rem;">Cancel</button>
     </div>
 
     <div class="form-grid">
-      <div class="field">
-        <label>Full Name *</label>
+      <div>
+        <label for="inp-name">Full Name *</label>
         <input type="text" id="inp-name" placeholder="e.g. Sarah Tan" />
       </div>
-      <div class="field">
-        <label>Company</label>
+      <div>
+        <label for="inp-company">Company</label>
         <input type="text" id="inp-company" placeholder="e.g. Acme Pte Ltd" />
       </div>
-      <div class="field">
-        <label>Email</label>
+      <div>
+        <label for="inp-email">Email</label>
         <input type="email" id="inp-email" placeholder="sarah@example.com" />
       </div>
-      <div class="field">
-        <label>Phone</label>
+      <div>
+        <label for="inp-phone">Phone</label>
         <input type="text" id="inp-phone" placeholder="+65 9123 4567" />
       </div>
     </div>
 
     <div class="btn-row">
-      <button class="btn-primary" id="save-btn" onclick="saveContact()">
-        <span id="save-icon">＋</span> <span id="save-label">Add Contact</span>
-      </button>
-      <button class="btn-ghost" onclick="clearForm()">Clear</button>
+      <button class="btn-primary" id="btn-save">＋ Add Contact</button>
+      <button class="btn-ghost"   id="btn-clear">Clear</button>
     </div>
   </div>
 
-  <!-- Records Section -->
-  <div class="card" style="animation-delay:0.2s">
-    <div class="card-title"><span class="dot" style="background:var(--green); box-shadow:0 0 8px var(--green)"></span> All Contacts</div>
+  <!-- Records -->
+  <div class="card">
+    <div class="card-title">
+      <span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>
+      All Contacts
+      <button class="btn-ghost" id="btn-refresh" style="margin-left:auto;padding:0.35rem 0.8rem;font-size:0.8rem;">↻ Refresh</button>
+    </div>
 
     <div class="stats-row">
-      <div class="stat-chip">👥 Total: <strong id="stat-total">0</strong></div>
-      <div class="stat-chip">✅ Loaded: <strong id="stat-loaded">—</strong></div>
+      <div class="stat-chip">👥 Total: <strong id="stat-total">—</strong></div>
+      <div class="stat-chip">🕐 Last loaded: <strong id="stat-loaded">—</strong></div>
     </div>
 
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input type="text" id="search-inp" placeholder="Search by name, email or company…" oninput="filterTable()" />
+      <input type="text" id="search-inp" placeholder="Search by name, email or company…" />
     </div>
 
     <div class="table-wrap">
@@ -573,14 +489,12 @@
           </tr>
         </thead>
         <tbody id="contacts-tbody">
-          <tr>
-            <td colspan="5">
-              <div class="empty-state">
-                <div class="icon">🔌</div>
-                Connect to Supabase above to load contacts
-              </div>
-            </td>
-          </tr>
+          <tr><td colspan="5">
+            <div class="empty-state">
+              <div class="icon">🔌</div>
+              Connect to Supabase above to load contacts
+            </div>
+          </td></tr>
         </tbody>
       </table>
     </div>
@@ -588,69 +502,80 @@
 
 </div><!-- /wrapper -->
 
-<!-- Supabase JS SDK via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
 <script>
-  // ─── State ────────────────────────────────────────────────────────────────
-  let supabase = null
+  // ── State ──────────────────────────────────────────────────────────────────
+  let sb          = null   // supabase client
   let allContacts = []
-  let editingId = null
+  let editingId   = null
 
-  // ─── Config ───────────────────────────────────────────────────────────────
-  function saveConfig() {
-    const url = document.getElementById('cfg-url').value.trim()
-    const key = document.getElementById('cfg-key').value.trim()
+  // ── Wire up all buttons via addEventListener (no inline onclick) ───────────
+  document.getElementById('btn-connect').addEventListener('click', saveConfig)
+  document.getElementById('btn-save').addEventListener('click', saveContact)
+  document.getElementById('btn-clear').addEventListener('click', cancelEdit)
+  document.getElementById('btn-cancel-edit').addEventListener('click', cancelEdit)
+  document.getElementById('btn-refresh').addEventListener('click', loadContacts)
+  document.getElementById('search-inp').addEventListener('input', filterTable)
 
-    if (!url || !key) { showToast('Enter both URL and Anon Key', 'error'); return }
-    if (!url.startsWith('https://')) { showToast('URL must start with https://', 'error'); return }
-
-    try {
-      supabase = window.supabase.createClient(url, key)
-      localStorage.setItem('sb_url', url)
-      localStorage.setItem('sb_key', key)
-      showToast('Connected! Loading contacts…', 'success')
-      document.getElementById('setup-banner').style.display = 'none'
-      loadContacts()
-    } catch (e) {
-      showToast('Connection failed: ' + e.message, 'error')
-    }
-  }
-
-  // Auto-load from localStorage
+  // ── Auto-load saved credentials ────────────────────────────────────────────
   window.addEventListener('DOMContentLoaded', () => {
     const url = localStorage.getItem('sb_url')
     const key = localStorage.getItem('sb_key')
     if (url && key) {
       document.getElementById('cfg-url').value = url
       document.getElementById('cfg-key').value = key
-      saveConfig()
+      initSupabase(url, key)
     }
   })
 
-  // ─── Load / Fetch ──────────────────────────────────────────────────────────
-  async function loadContacts() {
-    if (!supabase) { showToast('Connect to Supabase first', 'error'); return }
+  // ── Connect ────────────────────────────────────────────────────────────────
+  function saveConfig() {
+    const url = document.getElementById('cfg-url').value.trim()
+    const key = document.getElementById('cfg-key').value.trim()
+    if (!url || !key)                  { showToast('Please enter both URL and Anon Key', 'error'); return }
+    if (!url.startsWith('https://'))   { showToast('URL must start with https://', 'error'); return }
+    initSupabase(url, key)
+  }
 
-    setLoading(true)
-    const { data, error } = await supabase
+  function initSupabase(url, key) {
+    try {
+      sb = window.supabase.createClient(url, key)
+      localStorage.setItem('sb_url', url)
+      localStorage.setItem('sb_key', key)
+      document.getElementById('setup-banner').style.display = 'none'
+      showToast('Connected! Loading contacts…', 'success')
+      loadContacts()
+    } catch (e) {
+      showToast('Connection failed: ' + e.message, 'error')
+    }
+  }
+
+  // ── Load ───────────────────────────────────────────────────────────────────
+  async function loadContacts() {
+    if (!sb) { showToast('Connect to Supabase first', 'error'); return }
+    setTableLoading(true)
+
+    const { data, error } = await sb
       .from('contacts')
       .select('*')
       .order('created_at', { ascending: false })
 
-    setLoading(false)
-
-    if (error) { showToast('Error loading: ' + error.message, 'error'); return }
+    if (error) {
+      setTableLoading(false)
+      showToast('Load failed: ' + error.message, 'error')
+      return
+    }
 
     allContacts = data || []
     renderTable(allContacts)
-    document.getElementById('stat-total').textContent = allContacts.length
+    document.getElementById('stat-total').textContent  = allContacts.length
     document.getElementById('stat-loaded').textContent = new Date().toLocaleTimeString()
   }
 
-  // ─── Save (Insert or Update) ──────────────────────────────────────────────
+  // ── Save (Insert or Update) ────────────────────────────────────────────────
   async function saveContact() {
-    if (!supabase) { showToast('Connect to Supabase first', 'error'); return }
+    if (!sb) { showToast('Connect to Supabase first', 'error'); return }
 
     const name    = document.getElementById('inp-name').value.trim()
     const email   = document.getElementById('inp-email').value.trim()
@@ -659,123 +584,125 @@
 
     if (!name) { showToast('Name is required', 'error'); return }
 
-    const payload = { name, email: email || null, phone: phone || null, company: company || null }
-
-    setSaveLoading(true)
-
-    if (editingId) {
-      // UPDATE
-      const { error } = await supabase
-        .from('contacts')
-        .update(payload)
-        .eq('id', editingId)
-
-      setSaveLoading(false)
-      if (error) { showToast('Update failed: ' + error.message, 'error'); return }
-      showToast('Contact updated ✓', 'success')
-      cancelEdit()
-    } else {
-      // INSERT
-      const { error } = await supabase
-        .from('contacts')
-        .insert([payload])
-
-      setSaveLoading(false)
-      if (error) { showToast('Insert failed: ' + error.message, 'error'); return }
-      showToast('Contact added ✓', 'success')
-      clearForm()
+    const payload = {
+      name,
+      email:   email   || null,
+      phone:   phone   || null,
+      company: company || null,
     }
 
+    const btn = document.getElementById('btn-save')
+    btn.disabled = true
+    btn.innerHTML = '<span class="spinner"></span> Saving…'
+
+    if (editingId) {
+      const { error } = await sb.from('contacts').update(payload).eq('id', editingId)
+      btn.disabled = false
+      if (error) { showToast('Update failed: ' + error.message, 'error'); resetSaveBtn(); return }
+      showToast('Contact updated ✓', 'success')
+    } else {
+      const { error } = await sb.from('contacts').insert([payload])
+      btn.disabled = false
+      if (error) { showToast('Insert failed: ' + error.message, 'error'); resetSaveBtn(); return }
+      showToast('Contact added ✓', 'success')
+    }
+
+    cancelEdit()
     loadContacts()
   }
 
-  // ─── Delete ───────────────────────────────────────────────────────────────
+  // ── Delete ─────────────────────────────────────────────────────────────────
   async function deleteContact(id, name) {
-    if (!confirm(`Delete "${name}"? This cannot be undone.`)) return
-
-    const { error } = await supabase
-      .from('contacts')
-      .delete()
-      .eq('id', id)
-
+    if (!confirm('Delete "' + name + '"? This cannot be undone.')) return
+    const { error } = await sb.from('contacts').delete().eq('id', id)
     if (error) { showToast('Delete failed: ' + error.message, 'error'); return }
     showToast('Contact deleted', 'info')
     loadContacts()
   }
 
-  // ─── Edit ─────────────────────────────────────────────────────────────────
-  function startEdit(contact) {
-    editingId = contact.id
-    document.getElementById('inp-name').value    = contact.name    || ''
-    document.getElementById('inp-email').value   = contact.email   || ''
-    document.getElementById('inp-phone').value   = contact.phone   || ''
-    document.getElementById('inp-company').value = contact.company || ''
+  // ── Edit ───────────────────────────────────────────────────────────────────
+  function startEdit(id, name, email, phone, company) {
+    editingId = id
+    document.getElementById('inp-name').value    = name    || ''
+    document.getElementById('inp-email').value   = email   || ''
+    document.getElementById('inp-phone').value   = phone   || ''
+    document.getElementById('inp-company').value = company || ''
 
-    document.getElementById('form-title').textContent = 'Edit Contact'
-    document.getElementById('save-label').textContent = 'Save Changes'
-    document.getElementById('save-icon').textContent  = '✓'
+    document.getElementById('form-title').textContent    = 'Edit Contact'
+    document.getElementById('editing-name').textContent  = name
+    document.getElementById('editing-bar').style.display = 'flex'
+    document.getElementById('btn-save').innerHTML        = '✓ Save Changes'
 
-    const ind = document.getElementById('editing-indicator')
-    ind.style.display = 'flex'
-    document.getElementById('editing-name').textContent = contact.name
-
-    // Scroll to form
-    document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'start' })
+    document.querySelector('.card').scrollIntoView({ behavior: 'smooth' })
     document.getElementById('inp-name').focus()
   }
 
   function cancelEdit() {
     editingId = null
-    clearForm()
-    document.getElementById('form-title').textContent = 'Add New Contact'
-    document.getElementById('save-label').textContent = 'Add Contact'
-    document.getElementById('save-icon').textContent  = '＋'
-    document.getElementById('editing-indicator').style.display = 'none'
+    document.getElementById('inp-name').value    = ''
+    document.getElementById('inp-email').value   = ''
+    document.getElementById('inp-phone').value   = ''
+    document.getElementById('inp-company').value = ''
+    document.getElementById('form-title').textContent    = 'Add New Contact'
+    document.getElementById('editing-bar').style.display = 'none'
+    resetSaveBtn()
   }
 
-  function clearForm() {
-    ['inp-name','inp-email','inp-phone','inp-company'].forEach(id => {
-      document.getElementById(id).value = ''
-    })
+  function resetSaveBtn() {
+    const btn = document.getElementById('btn-save')
+    btn.disabled  = false
+    btn.innerHTML = editingId ? '✓ Save Changes' : '＋ Add Contact'
   }
 
-  // ─── Render Table ─────────────────────────────────────────────────────────
+  // ── Render Table ───────────────────────────────────────────────────────────
   function renderTable(contacts) {
     const tbody = document.getElementById('contacts-tbody')
 
     if (contacts.length === 0) {
-      tbody.innerHTML = `
-        <tr><td colspan="5">
-          <div class="empty-state">
-            <div class="icon">📭</div>
-            No contacts yet — add your first one above!
-          </div>
-        </td></tr>`
+      tbody.innerHTML = `<tr><td colspan="5">
+        <div class="empty-state">
+          <div class="icon">📭</div>
+          No contacts yet — add your first one above!
+        </div></td></tr>`
       return
     }
 
-    tbody.innerHTML = contacts.map((c, i) => `
-      <tr style="animation-delay:${i * 0.04}s">
-        <td>
-          <div class="name-cell">
-            <div class="avatar">${initials(c.name)}</div>
+    tbody.innerHTML = contacts.map((c, i) => {
+      const ini  = (c.name || '?').split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2)
+      const safe = (s) => (s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+      return `
+        <tr style="animation-delay:${i * 0.04}s">
+          <td><div class="name-cell">
+            <div class="avatar">${ini}</div>
             <span>${esc(c.name)}</span>
-          </div>
-        </td>
-        <td>${c.email ? esc(c.email) : '<span style="color:var(--muted)">—</span>'}</td>
-        <td>${c.phone ? esc(c.phone) : '<span style="color:var(--muted)">—</span>'}</td>
-        <td>${c.company ? esc(c.company) : '<span style="color:var(--muted)">—</span>'}</td>
-        <td>
-          <div style="display:flex;gap:0.4rem">
-            <button class="action-btn btn-edit" onclick='startEdit(${JSON.stringify(c)})'>✏️ Edit</button>
-            <button class="action-btn btn-del"  onclick="deleteContact('${c.id}', '${esc(c.name)}')">🗑 Delete</button>
-          </div>
-        </td>
-      </tr>
-    `).join('')
+          </div></td>
+          <td>${c.email   ? esc(c.email)   : '<span style="color:var(--muted)">—</span>'}</td>
+          <td>${c.phone   ? esc(c.phone)   : '<span style="color:var(--muted)">—</span>'}</td>
+          <td>${c.company ? esc(c.company) : '<span style="color:var(--muted)">—</span>'}</td>
+          <td>
+            <div style="display:flex;gap:0.4rem">
+              <button class="action-btn btn-edit" data-id="${c.id}" data-name="${safe(c.name)}" data-email="${safe(c.email)}" data-phone="${safe(c.phone)}" data-company="${safe(c.company)}">✏️ Edit</button>
+              <button class="action-btn btn-del"  data-id="${c.id}" data-name="${safe(c.name)}">🗑 Delete</button>
+            </div>
+          </td>
+        </tr>`
+    }).join('')
+
+    // Attach edit/delete listeners to each row button
+    tbody.querySelectorAll('.btn-edit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        startEdit(btn.dataset.id, btn.dataset.name, btn.dataset.email, btn.dataset.phone, btn.dataset.company)
+      })
+    })
+
+    tbody.querySelectorAll('.btn-del').forEach(btn => {
+      btn.addEventListener('click', () => {
+        deleteContact(btn.dataset.id, btn.dataset.name)
+      })
+    })
   }
 
-  // ─── Search / Filter ──────────────────────────────────────────────────────
+  // ── Search ─────────────────────────────────────────────────────────────────
   function filterTable() {
     const q = document.getElementById('search-inp').value.toLowerCase()
     const filtered = allContacts.filter(c =>
@@ -786,43 +713,31 @@
     renderTable(filtered)
   }
 
-  // ─── UI Helpers ───────────────────────────────────────────────────────────
-  function setSaveLoading(on) {
-    const btn = document.getElementById('save-btn')
-    btn.disabled = on
-    if (on) {
-      btn.innerHTML = '<span class="spinner"></span> Saving…'
-    } else {
-      btn.innerHTML = `<span id="save-icon">${editingId ? '✓' : '＋'}</span> <span id="save-label">${editingId ? 'Save Changes' : 'Add Contact'}</span>`
-    }
-  }
-
-  function setLoading(on) {
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function setTableLoading(on) {
     if (on) {
       document.getElementById('contacts-tbody').innerHTML =
-        `<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted)">
-          <span class="spinner" style="border-top-color:var(--accent)"></span> Loading…
+        `<tr><td colspan="5" style="text-align:center;padding:2.5rem;color:var(--muted)">
+          <span class="spinner" style="border-top-color:var(--accent)"></span>
+          &nbsp; Loading…
         </td></tr>`
     }
   }
 
-  let toastTimer = null
-  function showToast(msg, type = 'info') {
-    const t = document.getElementById('toast')
-    t.textContent = { success: '✅ ', error: '❌ ', info: 'ℹ️ ' }[type] + msg
-    t.className = `toast-${type}`
-    clearTimeout(toastTimer)
-    toastTimer = setTimeout(() => { t.style.display = 'none' }, 3500)
-  }
-
-  function initials(name) {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
-  }
-
   function esc(str) {
     const d = document.createElement('div')
-    d.textContent = str
+    d.textContent = str || ''
     return d.innerHTML
+  }
+
+  let toastTimer = null
+  function showToast(msg, type) {
+    const t = document.getElementById('toast')
+    const icons = { success: '✅', error: '❌', info: 'ℹ️' }
+    t.textContent = (icons[type] || '') + ' ' + msg
+    t.className   = 'toast-' + type
+    clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => { t.style.display = 'none' }, 3500)
   }
 </script>
 </body>
